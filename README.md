@@ -7,8 +7,7 @@ Task-Tracker 是一个简单的任务管理应用程序。可以通过简单的�
 
 - 创建、编辑和删除任务
 - 设置任务状态（例如：todo、in-progress、done）
-- 查看任务列表和进度报告
-- 用户友好的界面，易于使用
+- 查看不同状态的任务列表
 
 ## 打包为可执行文件
 
@@ -22,26 +21,26 @@ Task-Tracker 是一个简单的任务管理应用程序。可以通过简单的�
 
    - 对于Windows：
      ```
-     go build -o taskcli.exe main.go
+     go build -o task-cli.exe main.go
      ```
 
    - 对于macOS或Linux：
      ```
-     go build -o taskcli main.go
+     go build -o task-cli main.go
      ```
 
-4. 打包完成后，您将在当前目录下看到名为`taskcli`（或在Windows上为`taskcli.exe`）的可执行文件。
+4. 打包完成后，您将在当前目录下看到名为`task-cli`（或在Windows上为`task-cli.exe`）的可执行文件。
 
 5. 现在您可以直接运行这个可执行文件：
 
    - 在Windows上：
      ```
-     .\taskcli.exe
+     .\task-cli.exe
      ```
 
    - 在macOS或Linux上：
      ```
-     ./taskcli
+     ./task-cli
      ```
 
 注意：确保将可执行文件移动到系统的PATH中，或者在运行时提供完整的文件路径，以便从任何位置访问taskcli。
@@ -50,15 +49,38 @@ Task-Tracker 是一个简单的任务管理应用程序。可以通过简单的�
 
 ## 使用
 
-taskc是一个简单的命令行程序，您可以通过`./taskcli help`来查看文档：
+taskc是一个简单的命令行程序，您可以通过`./task-cli help`来查看文档：
+```shell
+   Usage: task-cli <command> [args]
+   Commands:
+     add <description> - Add a new task
+     update <id> <description> - Update the description of a task
+     delete <id> - Delete a task
+     list <state> - List all tasks (state: "todo"\"in-progress"\"done"\"") 
+     mark-in-progress <id> - Mark a task as in progress
+     mark-done <id> - Mark a task as done
+     help - Show this help message
 ```
-Usage: taskcli <command> [args]
-Commands:
-  add <description> - Add a new task
-  update <id> <description> - Update the description of a task
-  delete <id> - Delete a task
-  list - List all tasks
-  mark-in-progress <id> - Mark a task as in progress
-  mark-done <id> - Mark a task as done
-  help - Show this help message
+
+## 示例
+```shell
+   # Adding a new task
+   task-cli add "Buy groceries"
+   # Output: Task added successfully (ID: 1)
+   
+   # Updating and deleting tasks
+   task-cli update 1 "Buy groceries and cook dinner"
+   task-cli delete 1
+   
+   # Marking a task as in progress or done
+   task-cli mark-in-progress 1
+   task-cli mark-done 1
+   
+   # Listing all tasks
+   task-cli list
+   
+   # Listing tasks by status
+   task-cli list done
+   task-cli list todo
+   task-cli list in-progress
 ```
